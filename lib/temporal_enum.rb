@@ -4,5 +4,8 @@ require_relative "temporal_enum/version"
 
 module TemporalEnum
   class Error < StandardError; end
-  # Your code goes here...
+
+  def self.hello
+    'Hello, world!'
+  end
 end
