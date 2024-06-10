@@ -9,9 +9,3 @@ ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',
   database: ':memory:'
 )
-
-ActiveRecord::Schema.define do
-  create_table :my_classes, force: true do |t|
-    t.integer :status
-  end
-end

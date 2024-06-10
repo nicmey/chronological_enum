@@ -3,6 +3,12 @@
 require 'test_helper'
 
 class TemporalEnumWithoutPrefixOrSuffixTest < Minitest::Test
+  ActiveRecord::Schema.define do
+    create_table :my_classes, force: true do |t|
+      t.integer :status
+    end
+  end
+
   class MyClass < ActiveRecord::Base
     extend TemporalEnum
 
@@ -10,7 +16,7 @@ class TemporalEnumWithoutPrefixOrSuffixTest < Minitest::Test
     temporal_enum(:status)
   end
 
-  def test_without_prefix_or_suffix_scopes_are_correct
+  def test_scopes_without_prefix_or_suffix_are_correct
     MyClass.create(status: 'created')
     MyClass.create(status: 'processing')
     MyClass.create(status: 'finished')

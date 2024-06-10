@@ -21,20 +21,57 @@ module TemporalEnum
   # raise an error unless
 
   def add_enum_temporal_methods(enum_name)
+    # trying to find if there is a prefix or a suffix
+    # probably should be in a service or at least refacto
+    enum_values = send(enum_name.to_s.pluralize).keys
+    enum_scopes = methods.map(&:to_s).select do |method_name|
+      enum_values.select { |enum_value| method_name.include? enum_value }.present?
+    end
+
+    # no _prefix, no _suffix
+    expected_scopes = enum_values + enum_values.map { |enum_value| "not_#{enum_value}" }
+    if (expected_scopes - enum_scopes).blank?
+      prefix = false
+      suffix = false
+    end
+
+    # _prefix: true
+    expected_scopes = enum_values.map { |enum_value| "#{enum_name}_#{enum_value}" } +
+                      enum_values.map { |enum_value| "not_#{enum_name}_#{enum_value}" }
+    if (expected_scopes - enum_scopes).blank?
+      prefix = true
+      suffix = false
+    end
+
+    # _suffix: true
+    expected_scopes = enum_values.map { |enum_value| "#{enum_value}_#{enum_name}" } +
+                      enum_values.map { |enum_value| "not_#{enum_value}_#{enum_name}" }
+    if (expected_scopes - enum_scopes).blank?
+      prefix = false
+      suffix = true
+    end
+
     send(enum_name.to_s.pluralize).each do |key, value|
-      define_singleton_method "after_#{key}" do
+      method_name = if prefix
+                      "#{enum_name}_#{key}"
+                    elsif suffix
+                      "#{key}_#{enum_name}"
+                    else
+                      key
+                    end
+      define_singleton_method "after_#{method_name}" do
         where("#{enum_name} > ?", value)
       end
 
-      define_singleton_method "before_#{key}" do
+      define_singleton_method "before_#{method_name}" do
         where("#{enum_name} < ?", value)
       end
 
-      define_singleton_method "after_or_#{key}" do
+      define_singleton_method "after_or_#{method_name}" do
         where("#{enum_name} >= ?", value)
       end
 
-      define_singleton_method "before_or_#{key}" do
+      define_singleton_method "before_or_#{method_name}" do
         where("#{enum_name} <= ?", value)
       end
     end
