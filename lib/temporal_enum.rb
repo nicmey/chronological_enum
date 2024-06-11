@@ -36,7 +36,7 @@ module TemporalEnum
   # method name depends on if a prefix or a suffix is provided
   def retrieve_prefix_or_suffix(enum_name)
     enum_values = send(enum_name.to_s.pluralize).keys
-    enum_scopes = methods.map(&:to_s).select do |method_name|
+    enum_scopes = (methods - ActiveRecord::Base.methods).map(&:to_s).select do |method_name|
       enum_values.select { |enum_value| method_name.include? enum_value }.present?
     end
 
