@@ -19,7 +19,9 @@ module TemporalEnum
     prefix, suffix = prefix_or_suffix(enum_name)
 
     send(enum_name.to_s.pluralize).each do |key, value|
-      method_name = if prefix.present?
+      method_name = if prefix.present? && suffix.present?
+                      "#{prefix}_#{key}_#{suffix}"
+                    elsif prefix.present?
                       "#{prefix}_#{key}"
                     elsif suffix.present?
                       "#{key}_#{suffix}"
