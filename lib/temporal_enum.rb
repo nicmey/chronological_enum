@@ -26,21 +26,10 @@ module TemporalEnum
                       key
                     end
 
-      define_singleton_method "after_#{method_name}" do
-        where("#{enum_name} > ?", value)
-      end
-
-      define_singleton_method "before_#{method_name}" do
-        where("#{enum_name} < ?", value)
-      end
-
-      define_singleton_method "after_or_#{method_name}" do
-        where("#{enum_name} >= ?", value)
-      end
-
-      define_singleton_method "before_or_#{method_name}" do
-        where("#{enum_name} <= ?", value)
-      end
+      scope "after_#{method_name}", -> { where("#{enum_name} > ?", value) }
+      scope "before_#{method_name}", -> { where("#{enum_name} < ?", value) }
+      scope "after_or_#{method_name}", -> { where("#{enum_name} >= ?", value) }
+      scope "before_or_#{method_name}", -> { where("#{enum_name} <= ?", value) }
     end
   end
 
@@ -77,7 +66,7 @@ module TemporalEnum
       return [nil, named_prefix_or_suffix]
     end
 
-    raise "Cannot create scopes for #{enum_name}"
+    raise "Cannot create temporal scopes for #{enum_name}"
   end
 
   def named_prefix_or_suffix(enum_scopes, enum_values)
