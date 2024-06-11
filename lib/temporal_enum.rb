@@ -9,6 +9,7 @@ module TemporalEnum
   # extend TemporalEnum
   # temporal_enum(:enum_name)
   def temporal_enum(enum)
+    check_enum_values!(enum)
     add_enum_temporal_methods(enum)
   end
 
@@ -66,7 +67,7 @@ module TemporalEnum
       return [nil, named_prefix_or_suffix]
     end
 
-    raise "Cannot create temporal scopes for #{enum_name}"
+    raise ArgumentError, "Cannot create temporal scopes for #{enum_name}"
   end
 
   def named_prefix_or_suffix(enum_scopes, enum_values)
@@ -76,5 +77,11 @@ module TemporalEnum
     end.uniq.sole
   rescue Enumerable::SoleItemExpectedError
     nil
+  end
+
+  def check_enum_values!(enum_name)
+    return if send(enum_name.to_s.pluralize).values.all? { |value| value.is_a? Integer }
+
+    raise ArgumentError, "Values for #{enum_name} must be integer to be temporal"
   end
 end
