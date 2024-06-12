@@ -2,20 +2,17 @@
 
 require 'test_helper'
 
+ActiveRecord::Schema.define do
+  create_table :dummy_class_with_prefixes, force: true do |t|
+    t.integer :status
+  end
+end
+
+class DummyClassWithPrefix < ActiveRecord::Base
+  enum status: { created: 0, processing: 1, finished: 2 }, _prefix: true, _temporal: true
+end
+
 class TemporalEnumWithPrefixTest < Minitest::Test
-  ActiveRecord::Schema.define do
-    create_table :dummy_class_with_prefixes, force: true do |t|
-      t.integer :status
-    end
-  end
-
-  class DummyClassWithPrefix < ActiveRecord::Base
-    extend TemporalEnum
-
-    enum status: { created: 0, processing: 1, finished: 2 }, _prefix: true
-    temporal_enum(:status)
-  end
-
   def test_scopes_with_prefix_are_correct
     DummyClassWithPrefix.create(status: 'created')
     DummyClassWithPrefix.create(status: 'processing')

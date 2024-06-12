@@ -1,16 +1,27 @@
 # frozen_string_literal: true
 
+require 'active_support/concern'
 require_relative 'temporal_enum/version'
+require 'pry'
+require 'temporal_enum/railtie' if defined?(Rails::Railtie)
 
 module TemporalEnum
+  extend ActiveSupport::Concern
+
+  included do
+  end
+
   class Error < StandardError; end
 
-  # in model it should be like this
-  # extend TemporalEnum
-  # temporal_enum(:enum_name)
-  def temporal_enum(enum)
-    check_enum_values!(enum)
-    add_enum_temporal_methods(enum)
+  def enum(name = nil, values = nil, **options)
+    temporal = options[:_temporal]
+    options.delete(:_temporal)
+    super(name, values, **options)
+
+    return unless temporal
+
+    add_enum_temporal_methods(options.keys.first)
+    check_enum_values!(options.keys.first)
   end
 
   private

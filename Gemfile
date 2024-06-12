@@ -12,5 +12,6 @@ gem 'rubocop', '~> 1.21'
 group :development, :test do
   gem 'activerecord', '~> 6.1'
   gem 'minitest', '~> 5.0'
+  gem 'rails', '>= 5.2'
   gem 'sqlite3', '~> 1.4'
 end
