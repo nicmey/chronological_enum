@@ -5,7 +5,6 @@ require 'minitest/autorun'
 require 'rails'
 require 'active_record'
 require 'temporal_enum'
-require 'pry'
 
 ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',

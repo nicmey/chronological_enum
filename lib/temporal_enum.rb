@@ -2,7 +2,6 @@
 
 require 'active_support/concern'
 require_relative 'temporal_enum/version'
-require 'pry'
 require 'temporal_enum/railtie' if defined?(Rails::Railtie)
 
 module TemporalEnum
