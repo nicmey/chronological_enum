@@ -1,11 +1,11 @@
-# TemporalEnum
+# ChronologicalEnum
 
-TemporalEnum is a Ruby gem that extends ActiveRecord enums to provide dynamic scopes for enums with values in a specified order.
+ChronologicalEnum is a Ruby gem that extends ActiveRecord enums to provide dynamic scopes for enums with values in a specified order.
 
 For example
 ```ruby
 class MyClass < ApplicationRecord
-  enum status: { created: 0, processed: 1, finished: 2 }, _temporal: true
+  enum status: { created: 0, processed: 1, finished: 2 }, _chronological: true
 end
 
 # Scope examples
@@ -18,20 +18,20 @@ MyClass.before_or_processed # returns records with status lower or equal to fini
 It also supports prefixes and suffixes.
 ```ruby
 class MyClass < ApplicationRecord
-  enum status: { created: 0, processed: 1, finished: 2 }, _prefix: 'my', _suffix: 'enum',_temporal: true
+  enum status: { created: 0, processed: 1, finished: 2 }, _prefix: 'my', _suffix: 'enum',_chronological: true
 end
 
 MyClass.after_my_status_enum # returns records with status greater than created
 ```
 
-The enum values have to be integers otherwise TemporalEnum would not work.
+The enum values have to be integers otherwise ChronologicalEnum would not work.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'temporal_enum'
+gem 'chronological_enum'
 ```
 
 And then execute:
@@ -40,15 +40,15 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install temporal_enum
+    $ gem install chronological_enum
 
 ## Usage
 
-Just add `_temporal: true` to your enum definition as shown above.
+Just add `_chronological: true` to your enum definition as shown above.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/nicmey/temporal_enum. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/temporal_enum/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/nicmey/chronological_enum. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/nicmey/chronological_enum/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -56,4 +56,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the TemporalEnum project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/nicmey/temporal_enum/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the chronologicalEnum project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/nicmey/chronological_enum/blob/main/CODE_OF_CONDUCT.md).

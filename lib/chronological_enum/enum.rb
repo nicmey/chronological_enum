@@ -1,19 +1,19 @@
-module TemporalEnum
+module ChronologicalEnum
   module Enum
     def enum(name = nil, values = nil, **options)
-      temporal = options.delete(:_temporal)
+      chronological = options.delete(:_chronological)
       super(name, values, **options)
 
-      return unless temporal
+      return unless chronological
 
       enum_name = name || options.keys.first
       check_enum_values!(enum_name)
-      add_enum_temporal_scopes(enum_name: enum_name, prefix: options[:_prefix], suffix: options[:_suffix])
+      add_enum_chronological_scopes(enum_name: enum_name, prefix: options[:_prefix], suffix: options[:_suffix])
     end
 
     private
 
-    def add_enum_temporal_scopes(enum_name:, prefix: nil, suffix: nil)
+    def add_enum_chronological_scopes(enum_name:, prefix: nil, suffix: nil)
       prefix = if prefix
                  prefix == true ? "#{enum_name}_" : "#{prefix}_"
                end
@@ -35,7 +35,7 @@ module TemporalEnum
     def check_enum_values!(enum_name)
       return if send(enum_name.to_s.pluralize).values.all? { |value| value.is_a? Integer }
 
-      raise ArgumentError, "Values for #{enum_name} must be integer to be temporal"
+      raise ArgumentError, "Values for #{enum_name} must be integer to be chronological"
     end
   end
 end

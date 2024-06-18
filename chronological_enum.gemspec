@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
-require_relative "lib/temporal_enum/version"
+require_relative "lib/chronological_enum/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "temporal_enum"
-  spec.version = TemporalEnum::VERSION
+  spec.name = "chronological_enum"
+  spec.version = ChronologicalEnum::VERSION
   spec.authors = ["Nicolas Meyer"]
   spec.email = ["myr.nicolas@gmail.com"]
 
-  spec.summary = "Temporal enum"
-  spec.description = "Add temporality to enum in rails with after and before queries for enums that have temporality"
-  spec.homepage = "https://github.com/nicmey/temporal_enum"
+  spec.summary = "Chronological enum"
+  spec.description = "Add scopes to enum in rails with after and before queries for enums that have chronologicality"
+  spec.homepage = "https://github.com/nicmey/chronological_enum"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/nicmey/temporal_enum"
-  spec.metadata["changelog_uri"] = "https://github.com/nicmey/temporal_enum/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/nicmey/chronological_enum"
+  spec.metadata["changelog_uri"] = "https://github.com/nicmey/chronological_enum/blob/main/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

@@ -9,10 +9,10 @@ ActiveRecord::Schema.define do
 end
 
 class DummyClassWithPrefix < ActiveRecord::Base
-  enum status: { created: 0, processing: 1, finished: 2 }, _prefix: true, _temporal: true
+  enum status: { created: 0, processing: 1, finished: 2 }, _prefix: true, _chronological: true
 end
 
-class TemporalEnumWithPrefixTest < Minitest::Test
+class ChronologicalEnumWithPrefixTest < Minitest::Test
   def test_scopes_with_prefix_are_correct
     DummyClassWithPrefix.create(status: 'created')
     DummyClassWithPrefix.create(status: 'processing')

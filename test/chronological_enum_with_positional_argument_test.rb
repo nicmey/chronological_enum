@@ -9,10 +9,10 @@ ActiveRecord::Schema.define do
 end
 
 class DummyClassWithPositionalArgument < ActiveRecord::Base
-  enum :status, { created: 0, processing: 1, finished: 2 }, _temporal: true
+  enum :status, { created: 0, processing: 1, finished: 2 }, _chronological: true
 end
 
-class TemporalEnumWithPositionalArgument < Minitest::Test
+class ChronologicalEnumWithPositionalArgument < Minitest::Test
   def test_scopes_with_positional_argument
     DummyClassWithPositionalArgument.create(status: 'created')
     DummyClassWithPositionalArgument.create(status: 'processing')

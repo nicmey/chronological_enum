@@ -2,8 +2,8 @@
 
 require 'test_helper'
 
-class TemporalEnumTest < Minitest::Test
+class ChronologicalEnumTest < Minitest::Test
   def test_that_it_has_a_version_number
-    refute_nil ::TemporalEnum::VERSION
+    refute_nil ::ChronologicalEnum::VERSION
   end
 end

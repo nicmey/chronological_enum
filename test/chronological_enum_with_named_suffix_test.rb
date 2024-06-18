@@ -9,10 +9,10 @@ ActiveRecord::Schema.define do
 end
 
 class DummyClassWithNamedSuffix < ActiveRecord::Base
-  enum status: { created: 0, processing: 1, finished: 2 }, _suffix: 'suffix', _temporal: true
+  enum status: { created: 0, processing: 1, finished: 2 }, _suffix: 'suffix', _chronological: true
 end
 
-class TemporalEnumWithNamedSuffixTest < Minitest::Test
+class ChronologicalEnumWithNamedSuffixTest < Minitest::Test
   def test_with_named_suffix_scopes_are_correct
     DummyClassWithNamedSuffix.create(status: 'created')
     DummyClassWithNamedSuffix.create(status: 'processing')

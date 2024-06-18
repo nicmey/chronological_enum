@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    temporal_enum (0.1.0)
+    chronological_enum (0.1.0)
       rails (>= 5.2)
 
 GEM
@@ -180,12 +180,12 @@ PLATFORMS
   arm64-darwin-22
 
 DEPENDENCIES
+  chronological_enum!
   minitest (~> 5.0)
   rails (>= 5.2)
   rake (~> 13.0)
   rubocop (~> 1.21)
   sqlite3 (~> 1.4)
-  temporal_enum!
 
 BUNDLED WITH
    2.2.33

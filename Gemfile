@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in temporal_enum.gemspec
+# Specify your gem's dependencies in chronological_enum.gemspec
 gemspec
 
 gem 'rake', '~> 13.0'
